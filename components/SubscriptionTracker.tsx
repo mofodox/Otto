@@ -246,7 +246,7 @@ export default function SubscriptionTracker() {
             </main>
 
             <footer className="fixed bottom-4 left-0 w-full text-center text-xs text-gray-600">
-                &copy; 2024 designed & developed. Read the FAQs.
+                &copy; {new Date().getFullYear()} designed & developed. Read the FAQs.
             </footer>
         </div>
     );
