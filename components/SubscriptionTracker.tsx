@@ -31,10 +31,14 @@ export default function SubscriptionTracker() {
     const { startNextStep } = useNextStep();
 
     useEffect(() => {
-        const hasSeenTour = localStorage.getItem('hasSeenTour');
-        if (!hasSeenTour) {
-            startNextStep('mainTour');
-            localStorage.setItem('hasSeenTour', 'true');
+        try {
+            const hasSeenTour = localStorage.getItem('hasSeenTour');
+            if (!hasSeenTour) {
+                startNextStep('mainTour');
+                localStorage.setItem('hasSeenTour', 'true');
+            }
+        } catch (error) {
+            console.error('Failed to access localStorage:', error);
         }
     }, [startNextStep]);
 
