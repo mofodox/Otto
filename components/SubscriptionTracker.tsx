@@ -5,6 +5,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import SubscriptionForm from './SubscriptionForm';
 import { Trash2, Pencil } from 'lucide-react';
 import Modal from './Modal';
+import Header from './Header';
 
 interface Subscription {
     id: string;
@@ -90,17 +91,7 @@ export default function SubscriptionTracker() {
 
     return (
         <div className="bg-black text-white min-h-screen font-sans">
-            {/* Header */}
-            <header className="border-b border-gray-800 py-4 px-6 flex justify-between items-center">
-                <div className="text-xl font-bold">Leftover</div>
-                <div className="flex items-center gap-3">
-                    <span className="text-sm">Dashboard</span>
-                    <div className="h-8 w-8 rounded-full bg-gray-700 overflow-hidden border border-yellow-500">
-                        {/* Placeholder for avatar based on screenshot */}
-                        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" />
-                    </div>
-                </div>
-            </header>
+            <Header />
 
             <main className="max-w-4xl mx-auto p-8">
                 <div className="flex justify-between items-start mb-2">
