@@ -23,7 +23,7 @@ export default function AboutPage() {
                         </p>
 
                         <p>
-                            Plus, Otto works completely offline from banking systems, ensuring your financial data stays private on our secure servers.
+                            Plus, Otto works completely offline from banking systems, keeping your financial data stored locally on your device.
                         </p>
 
                         <Link href="/" className="cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-lg transition-colors">
