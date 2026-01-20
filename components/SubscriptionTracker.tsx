@@ -111,7 +111,7 @@ export default function SubscriptionTracker() {
 
                 {income === null ? (
                     <p className="text-xl text-gray-300">
-                        It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
+                        It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="cursor-pointer text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
                     </p>
                 ) : (
                     <p className="text-xl">
