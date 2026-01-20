@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useNextStep } from 'nextstepjs';
 import SubscriptionForm from './SubscriptionForm';
 import { Trash2, Pencil } from 'lucide-react';
 import Modal from './Modal';
@@ -27,6 +28,19 @@ export default function SubscriptionTracker() {
     const [date, setDate] = useState('');
     const [editingId, setEditingId] = useState<string | null>(null);
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const { startNextStep } = useNextStep();
+
+    useEffect(() => {
+        try {
+            const hasSeenTour = localStorage.getItem('hasSeenTour');
+            if (!hasSeenTour) {
+                startNextStep('mainTour');
+                localStorage.setItem('hasSeenTour', 'true');
+            }
+        } catch (error) {
+            console.error('Failed to access localStorage:', error);
+        }
+    }, [startNextStep]);
 
     const handleSaveSubscription = (e: React.FormEvent) => {
         e.preventDefault();
@@ -97,9 +111,10 @@ export default function SubscriptionTracker() {
             <main className="max-w-4xl mx-auto p-8">
                 <div className="flex justify-between items-start mb-2">
                     <div>
-                        <h1 className="text-4xl font-bold mb-6">Expenses</h1>
+                        <h1 id="tour-expenses-header" className="text-4xl font-bold mb-6">Expenses</h1>
                     </div>
                     <button
+                        id="tour-add-bill-btn"
                         onClick={() => {
                             resetForm();
                             setIsFormVisible(true);
@@ -110,24 +125,26 @@ export default function SubscriptionTracker() {
                     </button>
                 </div>
 
-                {income === null ? (
-                    <p className="text-xl text-gray-300">
-                        It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="cursor-pointer text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
-                    </p>
-                ) : (
-                    <p className="text-xl">
-                        You have <button
-                            onClick={() => {
-                                setTempIncome(income.toString());
-                                setIsIncomeModalOpen(true);
-                            }}
-                            className="cursor-pointer text-yellow-400 font-bold hover:underline hover:text-yellow-300 transition-colors"
-                            title="Click to update income"
-                        >
-                            S${(income - totalCost).toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                        </button> to spend.
-                    </p>
-                )}
+                <div id="tour-income-section">
+                    {income === null ? (
+                        <p className="text-xl text-gray-300">
+                            It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="cursor-pointer text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
+                        </p>
+                    ) : (
+                        <p className="text-xl">
+                            You have <button
+                                onClick={() => {
+                                    setTempIncome(income.toString());
+                                    setIsIncomeModalOpen(true);
+                                }}
+                                className="cursor-pointer text-yellow-400 font-bold hover:underline hover:text-yellow-300 transition-colors"
+                                title="Click to update income"
+                            >
+                                S${(income - totalCost).toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                            </button> to spend.
+                        </p>
+                    )}
+                </div>
 
                 <Modal
                     isOpen={isFormVisible}

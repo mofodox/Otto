@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { NextStepProvider, NextStep } from 'nextstepjs';
+import { steps } from '@/lib/tourSteps';
+import TourCard from '@/components/TourCard';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,8 +29,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
-        {children}
+        <NextStepProvider>
+          <NextStep steps={steps} cardComponent={TourCard}>
+            {children}
+          </NextStep>
+        </NextStepProvider>
       </body>
     </html>
   );
