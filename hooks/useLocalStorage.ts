@@ -23,21 +23,22 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
     // Wrapper function to update both state and localStorage
     const setValue = (value: T | ((val: T) => T)) => {
-        try {
-            // Allow value to be a function so we have same API as useState
+        setStoredValue((prev) => {
             const valueToStore =
-                value instanceof Function ? value(storedValue) : value;
+                typeof value === "function"
+                    ? (value as (val: T) => T)(prev)
+                    : value;
 
-            // Save state
-            setStoredValue(valueToStore);
-
-            // Save to local storage
-            if (typeof window !== "undefined") {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            try {
+                if (typeof window !== "undefined") {
+                    window.localStorage.setItem(key, JSON.stringify(valueToStore));
+                }
+            } catch (error) {
+                console.warn(`Error writing localStorage key "${key}":`, error);
             }
-        } catch (error) {
-            console.warn(`Error writing localStorage key "${key}":`, error);
-        }
+
+            return valueToStore;
+        });
     };
 
     return [storedValue, setValue] as const;
