@@ -103,27 +103,9 @@ export default function SubscriptionTracker() {
             </header>
 
             <main className="max-w-4xl mx-auto p-8">
-                <div className="flex justify-between items-start mb-8">
+                <div className="flex justify-between items-start mb-2">
                     <div>
                         <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
-                        {income === null ? (
-                            <p className="text-xl text-gray-300">
-                                It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
-                            </p>
-                        ) : (
-                            <p className="text-xl">
-                                You have <button
-                                    onClick={() => {
-                                        setTempIncome(income.toString());
-                                        setIsIncomeModalOpen(true);
-                                    }}
-                                    className="cursor-pointer text-yellow-400 font-bold hover:underline hover:text-yellow-300 transition-colors"
-                                    title="Click to update income"
-                                >
-                                    S${(income - totalCost).toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                </button> to spend.
-                            </p>
-                        )}
                     </div>
                     <button
                         onClick={() => {
@@ -135,6 +117,25 @@ export default function SubscriptionTracker() {
                         Add Bill
                     </button>
                 </div>
+
+                {income === null ? (
+                    <p className="text-xl text-gray-300">
+                        It looks like you haven&apos;t setup your income. <button onClick={() => setIsIncomeModalOpen(true)} className="text-yellow-400 font-bold underline hover:text-yellow-300">Add your income</button> to complete the setup.
+                    </p>
+                ) : (
+                    <p className="text-xl">
+                        You have <button
+                            onClick={() => {
+                                setTempIncome(income.toString());
+                                setIsIncomeModalOpen(true);
+                            }}
+                            className="cursor-pointer text-yellow-400 font-bold hover:underline hover:text-yellow-300 transition-colors"
+                            title="Click to update income"
+                        >
+                            S${(income - totalCost).toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                        </button> to spend.
+                    </p>
+                )}
 
                 <Modal
                     isOpen={isFormVisible}
