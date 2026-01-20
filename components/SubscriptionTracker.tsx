@@ -6,6 +6,7 @@ import SubscriptionForm from './SubscriptionForm';
 import { Trash2, Pencil } from 'lucide-react';
 import Modal from './Modal';
 import Header from './Header';
+import Footer from './Footer';
 
 interface Subscription {
     id: string;
@@ -96,7 +97,7 @@ export default function SubscriptionTracker() {
             <main className="max-w-4xl mx-auto p-8">
                 <div className="flex justify-between items-start mb-2">
                     <div>
-                        <h1 className="text-4xl font-bold mb-6">Dashboard</h1>
+                        <h1 className="text-4xl font-bold mb-6">Expenses</h1>
                     </div>
                     <button
                         onClick={() => {
@@ -237,9 +238,7 @@ export default function SubscriptionTracker() {
                 </div>
             </main>
 
-            <footer className="fixed bottom-4 left-0 w-full text-center text-xs text-gray-600">
-                &copy; {new Date().getFullYear()} designed & developed.
-            </footer>
+            <Footer />
         </div>
     );
 }
