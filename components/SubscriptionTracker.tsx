@@ -14,6 +14,14 @@ interface Subscription {
     date: string; // Storing date as YYYY-MM-DD string
 }
 
+/**
+ * Renders the subscription tracker dashboard and manages subscriptions and monthly income persisted to local storage.
+ *
+ * The component provides UI for adding, editing, and deleting recurring subscriptions, setting monthly income via a modal,
+ * and displays a running total of subscription costs alongside the available net amount to spend.
+ *
+ * @returns The JSX element for the subscription tracker dashboard.
+ */
 export default function SubscriptionTracker() {
     const [subscriptions, setSubscriptions] = useLocalStorage<Subscription[]>('subscriptions', []);
     const [income, setIncome] = useLocalStorage<number | null>('income', null);
