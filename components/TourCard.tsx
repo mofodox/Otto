@@ -34,11 +34,12 @@ const TourCard: React.FC<CardComponentProps> = ({
 
             <div className="flex justify-between items-center gap-4 text-sm">
                 <button
+                    type="button"
                     onClick={prevStep}
                     disabled={currentStep === 0}
                     className={`px-4 py-2 font-medium rounded-lg transition-colors ${currentStep === 0
-                            ? 'text-zinc-600 bg-zinc-800/50 cursor-not-allowed'
-                            : 'text-gray-300 bg-zinc-800 hover:bg-zinc-700 hover:text-white cursor-pointer'
+                        ? 'text-zinc-600 bg-zinc-800/50 cursor-not-allowed'
+                        : 'text-gray-300 bg-zinc-800 hover:bg-zinc-700 hover:text-white cursor-pointer'
                         }`}
                 >
                     Previous
@@ -50,6 +51,7 @@ const TourCard: React.FC<CardComponentProps> = ({
 
                 {currentStep === totalSteps - 1 ? (
                     <button
+                        type="button"
                         onClick={nextStep}
                         className="px-4 py-2 font-bold text-black bg-yellow-400 hover:bg-yellow-500 rounded-lg transition-colors cursor-pointer"
                     >
@@ -57,6 +59,7 @@ const TourCard: React.FC<CardComponentProps> = ({
                     </button>
                 ) : (
                     <button
+                        type="button"
                         onClick={nextStep}
                         className="px-4 py-2 font-bold text-black bg-yellow-400 hover:bg-yellow-500 rounded-lg transition-colors cursor-pointer"
                     >
@@ -69,6 +72,7 @@ const TourCard: React.FC<CardComponentProps> = ({
 
             {skipTour && currentStep < totalSteps - 1 && (
                 <button
+                    type="button"
                     onClick={skipTour}
                     className="mt-4 w-full py-2 text-xs font-medium text-gray-500 hover:text-gray-300 transition-colors cursor-pointer text-center"
                 >
